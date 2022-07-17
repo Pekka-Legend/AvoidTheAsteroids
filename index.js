@@ -118,7 +118,7 @@ function animate() {
 animate()
 
 function findMousePos(event){
-    player.position.x = event.pageX
+    player.position.x = event.screenX
     player.position.y = canvas.height - 100
 }
 function removeCursor(){
