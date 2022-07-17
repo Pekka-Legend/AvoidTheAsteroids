@@ -92,7 +92,7 @@ function animate() {
                 if (asteroid.deaths > 0){
                     asteroid.speed += asteroid.deaths / 10
                     if (asteroid.speed > 6){
-                        asteroid.speed = 6
+                        asteroid.speed = 8
                     }
                 }
             }
