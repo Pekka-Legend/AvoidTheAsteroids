@@ -1,6 +1,7 @@
 var going = false
 var mousex = 100
 var mousey = 100
+var score = 0
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 canvas.width = innerWidth
@@ -62,10 +63,19 @@ class Title {
         c.fillText(this.text, (canvas.width / 2) - 200, 150)
     }
 }
+class Score{
+    draw(){
+        const ctx = canvas.getContext('2d');
+        ctx.font = '128px serif';
+        ctx.fillStyle = ('black')
+        ctx.fillText(score, 10, 130);
+    }
+}
 const player = new Player(canvas.width / 2 - 35, canvas.height - 100)
 const background = new Background()
 const start = new Start()
 const title = new Title()
+const theScore = new Score()
 const asteroids = [new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0})]
 function animate() {
     requestAnimationFrame(animate)
@@ -77,7 +87,10 @@ function animate() {
         player.draw()
         for (a in asteroids) {
             if (player.position.x + player.width > asteroids[a].position.x && player.position.x < asteroids[a].position.x + asteroids[a].width && player.position.y + player.height > asteroids[a].position.y && player.position.y < asteroids[a].position.y + asteroids[a].height){
-                window.location.reload();
+                going = false
+                var reload = setInterval(function(){
+                    window.location.reload();
+                }, 1000)
             }
         }
         asteroids.forEach(asteroid => {
@@ -92,11 +105,14 @@ function animate() {
                 if (asteroid.deaths > 0){
                     asteroid.speed += asteroid.deaths / 10
                     if (asteroid.speed > 6){
-                        asteroid.speed = 8
+                        asteroid.speed = 6
                     }
                 }
             }
         })
+    }
+    if (score > 0){
+        theScore.draw()
     }
 }
 animate()
@@ -117,3 +133,9 @@ addEventListener('keydown', () => {
     start.text = ""
     title.text = ""
 })
+var addScore = setInterval(function(){
+    if (going){      
+        score++
+    }
+    theScore.draw()
+}, 100)
