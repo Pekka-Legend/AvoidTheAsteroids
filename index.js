@@ -56,11 +56,12 @@ class Start {
 class Title {
     constructor() {
         this.text = 'Avoid The Asteroids'
+        this.x = canvas.width / 2 - 135
     }
     draw(){
-        c.font = "45px Serif"
+        c.font = "90 Serif"
         c.fillStyle = 'black'
-        c.fillText(this.text, (canvas.width / 2) - 200, 150)
+        c.fillText(this.text, this.x, 150)
     }
 }
 class Score{
@@ -118,12 +119,29 @@ function animate() {
 animate()
 
 function findMousePos(event){
-    player.position.x = event.screenX
+    player.position.x = event.pageX
     player.position.y = canvas.height - 100
 }
+function removeCursor(){
+    canvas.classList.add("newClass")
+}
+function mouseEnter(event){
+    if (title.text == "Return your cursor to the game screen"){
+        title.text = ""
+        going = true
+    }
+}
+function mouseLeave(event){
+    if (going){
+        going = false
+        title.x = canvas.width / 2 - 230
+        title.text = "Return your cursor to the game screen"
+    }
+}
+removeCursor()
 canvas.addEventListener('mousemove', findMousePos, false)
-canvas.addEventListener("mouseenter", findMousePos, false);
-canvas.addEventListener("mouseleave", findMousePos, false);
+canvas.addEventListener("mouseenter", mouseEnter, false);
+canvas.addEventListener("mouseleave", mouseLeave, false);
 addEventListener('mousedown', () => {
     going = true
     start.text = ""
