@@ -105,7 +105,7 @@ function animate() {
                 if (asteroid.deaths > 0){
                     asteroid.speed += asteroid.deaths / 10
                     if (asteroid.speed > 10){
-                        asteroid.speed = 10
+                        asteroid.speed = 9 + Math.random()
                     }
                 }
             }
