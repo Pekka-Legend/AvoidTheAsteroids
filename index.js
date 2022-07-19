@@ -84,7 +84,7 @@ function animate() {
     background.draw()
     start.draw()
     title.draw()
-    if (title.text == "Return your cursor to the game screen" && going == false || going == true){
+    if (title.text == "Return your cursor to the game window" && going == false || going == true){
         asteroids.forEach(asteroid => {
             asteroid.draw()
         })
@@ -134,7 +134,7 @@ function removeCursor(){
     canvas.classList.add("newClass")
 }
 function mouseEnter(event){
-    if (title.text == "Return your cursor to the game screen"){
+    if (title.text == "Return your cursor to the game window"){
         title.text = ""
         going = true
     }
@@ -143,7 +143,7 @@ function mouseLeave(event){
     if (going){
         going = false
         title.x = canvas.width / 2 - 230
-        title.text = "Return your cursor to the game screen"
+        title.text = "Return your cursor to the game window"
     }
 }
 removeCursor()
