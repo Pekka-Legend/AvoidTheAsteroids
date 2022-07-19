@@ -126,6 +126,9 @@ animate()
 function findMousePos(event){
     player.position.x = event.pageX
     player.position.y = canvas.height - 100
+    if (player.position.x > canvas.width - 50){
+        player.position.x = canvas.width - 51
+    }
 }
 function removeCursor(){
     canvas.classList.add("newClass")
