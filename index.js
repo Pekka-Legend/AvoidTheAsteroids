@@ -45,7 +45,7 @@ class Asteroid {
 }
 class Start {
     constructor() {
-        this.text = 'Press Any Key To Play'
+        this.text = 'Click anywhere to play'
     }
     draw(){
         c.font = "30px Serif"
@@ -128,7 +128,7 @@ removeCursor()
 canvas.addEventListener('mousemove', findMousePos, false)
 canvas.addEventListener("mouseenter", findMousePos, false);
 canvas.addEventListener("mouseleave", findMousePos, false);
-addEventListener('keydown', () => {
+addEventListener('mousedown', () => {
     going = true
     start.text = ""
     title.text = ""
