@@ -121,10 +121,6 @@ function findMousePos(event){
     player.position.x = event.screenX
     player.position.y = canvas.height - 100
 }
-function removeCursor(){
-    canvas.classList.add("newClass")
-}
-removeCursor()
 canvas.addEventListener('mousemove', findMousePos, false)
 canvas.addEventListener("mouseenter", findMousePos, false);
 canvas.addEventListener("mouseleave", findMousePos, false);
