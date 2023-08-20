@@ -7,7 +7,7 @@ const c = canvas.getContext('2d')
 canvas.width = innerWidth
 canvas.height = innerHeight
 
-var startSpeed = 3
+var startSpeed = 6
 
 class Background {
     draw() {
@@ -191,5 +191,11 @@ document.ontouchmove = function(e)
     player.position.y = canvas.height - 100
     if (player.position.x > canvas.width - 50){
         player.position.x = canvas.width - 51
+    }
+}
+document.ontouchstart = function(e)
+{
+    if (e.target.nodeName !== 'INPUT') {
+        e.preventDefault();
     }
 }
