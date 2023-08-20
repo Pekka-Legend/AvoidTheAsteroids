@@ -6,6 +6,8 @@ const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 canvas.width = innerWidth
 canvas.height = innerHeight
+const window_x = window.pageOffsetX || document.documentElement.scrollLeft
+const window_y = window.pageOffsetY || document.documentElement.scrollTop
 
 var startSpeed = 6
 
@@ -184,14 +186,16 @@ var addScore = setInterval(function(){
     theScore.draw()
 }, 100)
 
-function touchHandler(e)
+document.ontouchmove = function touchHandler(e)
 {
     if (e.touches) //if the player is touching the screen
     {
         player.position.x = e.touches[0].pageX
-        e.preventDefault()
+        
     }
 }
 
-document.addEventListener("touchstart", touchHandler);
-document.addEventListener("touchmove", touchHandler);
+window.onscroll = function(e)
+{
+    window.scrollTo(window_x, window_y)
+}
