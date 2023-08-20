@@ -186,6 +186,7 @@ var addScore = setInterval(function(){
 
 document.ontouchmove = function(e)
 {
+    e.preventDefault()
     player.position.x = e.touches[0].pageX
     player.position.y = canvas.height - 100
     if (player.position.x > canvas.width - 50){
