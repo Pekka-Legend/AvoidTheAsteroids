@@ -6,6 +6,9 @@ const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 canvas.width = innerWidth
 canvas.height = innerHeight
+
+var startSpeed = 6
+
 class Background {
     draw() {
         c.fillStyle = 'DarkGrey'
@@ -33,7 +36,7 @@ class Asteroid {
             y: 0
         }
         this.deaths = deaths
-        this.speed = speed
+        this.speed = startSpeed + Math.random() * 3
         this.size = size
         this.width = this.size
         this.height = this.size
@@ -77,7 +80,7 @@ const background = new Background()
 const start = new Start()
 const title = new Title()
 const theScore = new Score()
-const asteroids = [new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0})]
+const asteroids = [new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: startSpeed, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0})]
 
 
 te = 0
@@ -121,11 +124,11 @@ function animate() {
                     asteroid.position.x = Math.floor(Math.random() * (canvas.width - 40))
                     asteroid.position.y = 0
                     asteroid.size = Math.floor(Math.random() * 20 + 20)
-                    asteroid.speed = (Math.random() * 3) + 1
+                    asteroid.speed = startSpeed + (Math.random() * 3) + 1
                     if (asteroid.deaths > 0){
                         asteroid.speed += asteroid.deaths / 10
-                        if (asteroid.speed > 10){
-                            asteroid.speed = 9 + Math.random()
+                        if (asteroid.speed > 30){
+                            asteroid.speed = 29 + Math.random()
                         }
                     }
                 }
@@ -134,7 +137,9 @@ function animate() {
         if (score > 0){
             theScore.draw()
         }
+        te = 0
     }
+    
     
 }
 
