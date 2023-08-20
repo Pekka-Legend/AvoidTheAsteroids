@@ -78,49 +78,66 @@ const start = new Start()
 const title = new Title()
 const theScore = new Score()
 const asteroids = [new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0}), new Asteroid({x :Math.floor(Math.random() * (canvas.width - 40)), size: Math.floor(Math.random() * 20 + 20), speed: (Math.random() * 3) + 1, deaths: 0})]
+
+
+te = 0
+ft = 16
+ct = Date.now()
+
 function animate() {
     requestAnimationFrame(animate)
-    c.clearRect(0, 0, canvas.width, canvas.height)
-    background.draw()
-    start.draw()
-    title.draw()
-    if (title.text == "Return your cursor to the game window" && going == false || going == true){
-        asteroids.forEach(asteroid => {
-            asteroid.draw()
-        })
-        player.draw()
+    st = ct
+
+    ct = Date.now()
+    te += ct - st
+
+
+    if (te >= ft)
+    {
+        c.clearRect(0, 0, canvas.width, canvas.height)
+        background.draw()
+        start.draw()
         title.draw()
-    }
-    if (going == true){
-        for (a in asteroids) {
-            if (player.position.x + player.width > asteroids[a].position.x && player.position.x < asteroids[a].position.x + asteroids[a].width && player.position.y + player.height > asteroids[a].position.y && player.position.y < asteroids[a].position.y + asteroids[a].height){
-                going = false
-                var reload = setInterval(function(){
-                    window.location.reload();
-                }, 1000)
-            }
+        if (title.text == "Return your cursor to the game window" && going == false || going == true){
+            asteroids.forEach(asteroid => {
+                asteroid.draw()
+            })
+            player.draw()
+            title.draw()
         }
-        asteroids.forEach(asteroid => {
-            asteroid.position.y += asteroid.speed
-            if (asteroid.position.y + asteroid.size + asteroid.speed > canvas.height){
-                asteroid.deaths += 1
-                asteroid.position.x = Math.floor(Math.random() * (canvas.width - 40))
-                asteroid.position.y = 0
-                asteroid.size = Math.floor(Math.random() * 20 + 20)
-                asteroid.speed = (Math.random() * 3) + 1
-                if (asteroid.deaths > 0){
-                    asteroid.speed += asteroid.deaths / 10
-                    if (asteroid.speed > 10){
-                        asteroid.speed = 9 + Math.random()
-                    }
+        if (going == true){
+            for (a in asteroids) {
+                if (player.position.x + player.width > asteroids[a].position.x && player.position.x < asteroids[a].position.x + asteroids[a].width && player.position.y + player.height > asteroids[a].position.y && player.position.y < asteroids[a].position.y + asteroids[a].height){
+                    going = false
+                    var reload = setInterval(function(){
+                        window.location.reload();
+                    }, 1000)
                 }
             }
-        })
+            asteroids.forEach(asteroid => {
+                asteroid.position.y += asteroid.speed
+                if (asteroid.position.y + asteroid.size + asteroid.speed > canvas.height){
+                    asteroid.deaths += 1
+                    asteroid.position.x = Math.floor(Math.random() * (canvas.width - 40))
+                    asteroid.position.y = 0
+                    asteroid.size = Math.floor(Math.random() * 20 + 20)
+                    asteroid.speed = (Math.random() * 3) + 1
+                    if (asteroid.deaths > 0){
+                        asteroid.speed += asteroid.deaths / 10
+                        if (asteroid.speed > 10){
+                            asteroid.speed = 9 + Math.random()
+                        }
+                    }
+                }
+            })
+        }
+        if (score > 0){
+            theScore.draw()
+        }
     }
-    if (score > 0){
-        theScore.draw()
-    }
+    
 }
+
 animate()
 
 function findMousePos(event){
@@ -161,3 +178,12 @@ var addScore = setInterval(function(){
     }
     theScore.draw()
 }, 100)
+
+document.ontouchmove = function(e)
+{
+    player.position.x = e.touches[0].pageX
+    player.position.y = canvas.height - 100
+    if (player.position.x > canvas.width - 50){
+        player.position.x = canvas.width - 51
+    }
+}
