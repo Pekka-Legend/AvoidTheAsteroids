@@ -184,19 +184,14 @@ var addScore = setInterval(function(){
     theScore.draw()
 }, 100)
 
-document.ontouchmove = function(e)
+function touchHandler(e)
 {
+    if (e.touches) //if the player is touching the screen
+    {
+        player.position.x = e.touches[0].pageX
+        e.preventDefault()
+    }
+}
 
-    player.position.x = e.touches[0].pageX
-    player.position.y = canvas.height - 100
-    if (player.position.x > canvas.width - 50){
-        player.position.x = canvas.width - 51
-    }
-    e.preventDefault()
-}
-document.ontouchstart = function(e)
-{
-    if (e.target.nodeName !== 'INPUT') {
-        e.preventDefault();
-    }
-}
+document.addEventListener("touchstart", touchHandler);
+document.addEventListener("touchmove", touchHandler);
