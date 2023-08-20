@@ -184,21 +184,18 @@ var addScore = setInterval(function(){
     theScore.draw()
 }, 100)
 
-// prevent scrolling from outside of input field
-$(document).on('touchstart', function(e) {
-    if (e.target.nodeName !== 'INPUT') {
-        e.preventDefault();
-    }
-});
-
-// prevent scrolling from within input field
-$(document).on('touchmove', function(e) {
-    if (e.target.nodeName == 'INPUT') {
-        e.preventDefault();
-    }
+document.ontouchmove = function(e)
+{
     player.position.x = e.touches[0].pageX
     player.position.y = canvas.height - 100
     if (player.position.x > canvas.width - 50){
         player.position.x = canvas.width - 51
     }
-});
+    e.preventDefault()
+}
+document.ontouchstart = function(e)
+{
+    if (e.target.nodeName !== 'INPUT') {
+        e.preventDefault();
+    }
+}
