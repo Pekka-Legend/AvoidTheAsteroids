@@ -191,8 +191,9 @@ document.ontouchmove = function touchHandler(e)
     if (e.touches) //if the player is touching the screen
     {
         player.position.x = e.touches[0].pageX
-        
+        e.preventDefault()
     }
+    
 }
 
 window.onscroll = function(e)
