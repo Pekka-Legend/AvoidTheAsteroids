@@ -7,7 +7,7 @@ const c = canvas.getContext('2d')
 canvas.width = innerWidth
 canvas.height = innerHeight
 
-var startSpeed = 6
+var startSpeed = 3
 
 class Background {
     draw() {
