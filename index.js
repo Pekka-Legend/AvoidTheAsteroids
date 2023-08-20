@@ -195,8 +195,3 @@ document.ontouchmove = function touchHandler(e)
     }
     
 }
-
-window.onscroll = function(e)
-{
-    window.scrollTo(window_x, window_y)
-}
